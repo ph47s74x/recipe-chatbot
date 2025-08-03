@@ -1,0 +1,1 @@
+based on the system prompt we created, update sample queries@sample_queries.csv with 100 sample queries that may come from a user that would comprehensivly test the LLM responses. Include edge cases that might cause failures.

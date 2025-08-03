@@ -1,0 +1,5 @@
+In this file we have a system prompt @utils.py;
+
+We want to update the system prompt to be for generating taco recipes with asian infusion. Do a web serach for best practices for creating LLM prompt for openai GPT.
+
+Provide me with some examples before adding it to the file
