@@ -1,0 +1,606 @@
+---
+description: Systematic implementation execution methodology for RAS SDK project plans.
+alwaysApply: false
+---
+# 🚀 Implementation Execution Rule
+
+This rule defines the methodology for autonomous, systematic execution of RAS SDK project plans with full compliance to standards and incremental progress tracking.
+
+---
+
+## 🎯 Core Implementation Principles
+
+### Execution Philosophy
+
+```markdown
+1. **Absolute Plan Fidelity**
+   - Execute exactly as specified in the approved plan
+   - One phase → task → sub-task at a time, in order
+   - Never skip, merge, or reorder unless explicitly instructed
+
+2. **Standards Compliance**
+   - Full compliance with all .cursor/rules/*.mdc standards
+   - Adherence to .cursorrules requirements
+   - Integration with existing RAS SDK patterns
+
+3. **Incremental Validation**
+   - Each sub-task must be fully complete before proceeding
+   - All changes must pass tests and linting
+   - Documentation must be updated with every change
+
+4. **Systematic Progress Tracking**
+   - Real-time updates to plan completion status
+   - Structured reporting of all changes
+   - Clear audit trail of implementation decisions
+```
+
+### Required Inputs
+
+```markdown
+**Core Implementation Context**:
+- **PLAN_FILE**: The approved project plan (e.g., docs/implementation/[project]_plan.md)
+- **RULE_DOCS**: All applicable .cursor/rules/*.mdc files
+- **BASE_RULES**: .cursorrules file requirements
+- **CODEBASE**: Full read/write access to source code, tests, and documentation
+
+**Standards Integration**:
+- alias-imports.mdc - Import path requirements
+- architecture.mdc - Directory and ownership standards
+- codequality.mdc - Code quality requirements
+- errors-standards.mdc - Error handling patterns
+- logging-standards.mdc - Logging requirements
+- testing-standards.mdc - Test coverage requirements
+- doc-standards.mdc - Documentation requirements
+```
+
+---
+
+## 🔄 Execution Loop Methodology
+
+### Step 1: Locate Next Work Item
+
+```markdown
+**Task Discovery Process**:
+1. Parse the PLAN_FILE from top to bottom
+2. Navigate to "Granular Task Breakdown" section
+3. Find the first unchecked checkbox `- [ ]` at the lowest level
+4. Identify the hierarchy: Phase → Task → Sub-task → Action item
+
+**Priority Order**:
+- Action items (deepest level) first
+- Sub-tasks when all action items complete
+- Tasks when all sub-tasks complete
+- Phases when all tasks complete
+
+**Example**:
+
+```markdown
+* **Task 1 – Configuration Updates**
+  * 1.1 Update module aliases ✅ COMPLETED
+  * 1.2 Update ESLint rules 🔄 IN_PROGRESS
+    * 1.2.1 Modify .eslintrc.js settings ← NEXT ITEM
+    * 1.2.2 Test with npm run lint
+  * 1.3 Verify CI/CD pipeline ⏳ PENDING
+```
+
+```
+
+### Step 2: Context Loading
+
+```markdown
+**Pre-Implementation Analysis**:
+1. **Load Relevant Standards**
+   - Read all applicable .cursor/rules/*.mdc files
+   - Review .cursorrules for specific requirements
+   - Check domain ownership in architecture.mdc
+
+2. **Analyze Current State**
+   - Examine existing code/files that will be modified
+   - Review related test files and documentation
+   - Check for potential conflicts or dependencies
+
+3. **Validate Prerequisites**
+   - Ensure all previous sub-tasks are complete
+   - Verify no blocking issues exist
+   - Confirm required tools/dependencies are available
+
+**Context Validation Checklist**:
+
+* [ ] All rule documents loaded and understood
+* [ ] Current file state analyzed
+* [ ] Dependencies and prerequisites confirmed
+* [ ] No conflicts with existing standards detected
+```
+
+### Step 3: Mini-Spec Design
+
+```markdown
+**Implementation Planning**:
+1. **Define Exact Changes**
+   - List specific files to be created/modified/deleted
+   - Detail the exact changes to be made
+   - Plan test updates required
+   - Plan documentation updates required
+
+2. **Standards Compliance Check**
+   - Verify alias imports will be used correctly
+   - Confirm error handling uses ErrorFactory
+   - Ensure logging uses LoggerFactory
+   - Validate architecture patterns
+
+3. **Test Strategy**
+   - Identify existing tests that need updates
+   - Plan new tests required
+   - Consider integration test impacts
+   - Plan validation scripts/commands
+
+**Mini-Spec Template**:
+
+```markdown
+**Implementation Scope**: [Sub-task description]
+**Files to Modify**: [List with change types]
+**New Files to Create**: [List with purposes]
+**Tests to Update/Create**: [List with test types]
+**Docs to Update/Create**: [List with content types]
+**Validation Commands**: [Commands to verify success]
+**Standards Applied**: [List of relevant rules]
+```
+
+### Step 4: Apply Changes
+
+```markdown
+**Implementation Execution**:
+1. **Code Changes**
+   - Make exact changes as specified in mini-spec
+   - Follow DRY principles and avoid code duplication
+   - Use established patterns from existing codebase
+   - Maintain consistent coding style
+
+2. **Test Updates**
+   - Update existing tests for modified functionality
+   - Create new tests for new functionality
+   - Ensure test coverage meets standards
+   - Follow testing patterns from testing-standards.mdc
+
+3. **Documentation Updates**
+   - Update affected documentation files
+   - Follow one-for-one module documentation rule
+   - Maintain cross-references and links
+   - Update table of contents and indexes
+
+**Change Application Standards**:
+- Use atomic commits for related changes
+- Maintain backward compatibility unless breaking changes are planned
+- Follow established file naming conventions
+- Preserve existing functionality unless explicitly changing it
+```
+
+### Step 5: Validation
+
+```markdown
+**Comprehensive Validation Process**:
+1. **Syntax and Linting**
+
+   ```bash
+   npm run lint [modified-files]
+   npm run lint:fix [if needed]
+   ```
+
+2. **Test Execution**
+
+   ```bash
+   npm run test [relevant-test-suites]
+   npm run test:unit
+   npm run test:integration [if applicable]
+   ```
+
+3. **Functionality Testing**
+
+   ```bash
+   # Test specific functionality affected
+   node [test-script] [if applicable]
+   npm run validate [if available]
+   ```
+
+4. **Standards Compliance**
+
+   * Verify alias imports are correctly used
+   * Check error handling uses ErrorFactory
+   * Confirm logging uses LoggerFactory
+   * Validate documentation updates
+
+**Validation Failure Protocol**:
+
+* If any validation fails, fix issues before proceeding
+* Document any discovered issues or blockers
+* Update mini-spec if changes are required
+* Re-run full validation after fixes
+```
+
+### Step 6: Checklist Update & Commit
+
+```markdown
+**Progress Tracking**:
+1. **Update Plan File**
+   - Mark completed sub-task as `- [x]` or `✅ COMPLETED`
+   - Update any progress indicators
+   - Add completion timestamp if required
+
+2. **Prepare Commit**
+   - Stage all modified files
+   - Create conventional commit message
+   - Include co-authored-by if applicable
+   - Reference issue/plan in commit body
+
+3. **Commit Standards**
+
+   ```text
+   <type>[optional scope]: <description>
+   
+   [optional body referencing plan section]
+   
+   Implements: [plan-file]#[section]
+   ```
+
+**Commit Message Examples**:
+
+```text
+feat(docs): reorganize utils documentation structure
+
+Move utility documentation from docs/utils/ to docs/domains/utils/
+and create domain-specific subdirectories for better organization.
+
+Implements: docs/implementation/doc_reorg_plan.md#task-1.2
+
+docs(utils): update cross-references after reorganization
+
+Update all internal links and table of contents to reflect new
+documentation structure in domains/utils organization.
+
+Implements: docs/implementation/doc_reorg_plan.md#task-1.3
+```
+```
+
+---
+
+## 📋 Implementation Standards
+
+### Required Execution Practices
+
+```markdown
+**Pre-Implementation Requirements**:
+- [ ] Plan file exists and is approved
+- [ ] All rule documents are current and loaded
+- [ ] Development environment is set up correctly
+- [ ] All prerequisites from previous tasks are met
+
+**During Implementation Requirements**:
+- [ ] Follow mini-spec exactly as designed
+- [ ] Apply all relevant standards and patterns
+- [ ] Update tests with every code change
+- [ ] Update documentation with every functional change
+- [ ] Validate each change before proceeding
+
+**Post-Implementation Requirements**:
+- [ ] All tests pass with no failures
+- [ ] All linting passes with no errors
+- [ ] All functionality works as expected
+- [ ] Documentation is accurate and complete
+- [ ] Plan file is updated with progress
+- [ ] Commit follows conventional commit standards
+```
+
+### Standards Compliance Integration
+
+```markdown
+**Architecture Standards (architecture.mdc)**:
+- Respect domain ownership boundaries
+- Use correct directory structures
+- Follow alias import requirements
+- Maintain approved file organization
+
+**Code Quality Standards (codequality.mdc)**:
+- Meet complexity and line length limits
+- Use proper naming conventions
+- Include JSDoc documentation
+- Follow DRY principles
+
+**Error Handling Standards (errors-standards.mdc)**:
+- Use ErrorFactory for all thrown errors
+- Include proper error context
+- Log errors before throwing
+- Follow error handling patterns
+
+**Logging Standards (logging-standards.mdc)**:
+- Use LoggerFactory for all logging
+- Include correlation IDs
+- Follow structured logging patterns
+- Respect logging levels
+
+**Testing Standards (testing-standards.mdc)**:
+- Maintain required coverage levels
+- Use proper test patterns
+- Include integration tests where needed
+- Follow test naming conventions
+```
+
+---
+
+## 📊 Progress Reporting
+
+### Output Contract
+
+```json
+{
+  "execution_metadata": {
+    "timestamp": "2024-01-15T10:30:00Z",
+    "plan_file": "docs/implementation/[project]_plan.md",
+    "execution_phase": "implementation"
+  },
+  "current_work": {
+    "phase": "<phase heading>",
+    "task": "<task heading>", 
+    "subtask": "<sub-task description>",
+    "action_item": "<specific action being executed>"
+  },
+  "implementation_details": {
+    "mini_spec": "<concise summary of work completed>",
+    "standards_applied": ["architecture.mdc", "codequality.mdc", "..."],
+    "complexity_metrics": {
+      "files_affected": 3,
+      "lines_changed": 45,
+      "tests_updated": 2
+    }
+  },
+  "changes_made": {
+    "files_modified": [
+      {
+        "path": "src/utils/example.js",
+        "change_type": "modified", 
+        "summary": "Updated to use ErrorFactory pattern",
+        "lines_changed": 15
+      }
+    ],
+    "files_created": [
+      {
+        "path": "tests/utils/example.test.js",
+        "change_type": "created",
+        "summary": "Added unit tests for updated functionality", 
+        "lines_added": 30
+      }
+    ],
+    "files_deleted": [
+      {
+        "path": "old/deprecated.js",
+        "change_type": "deleted",
+        "summary": "Removed deprecated utility"
+      }
+    ]
+  },
+  "validation_results": {
+    "tests_status": "passed|failed",
+    "linting_status": "passed|failed",
+    "functionality_status": "verified|issues",
+    "standards_compliance": "compliant|violations",
+    "validation_commands_run": [
+      "npm run test",
+      "npm run lint src/utils/"
+    ]
+  },
+  "progress_tracking": {
+    "plan_updates": {
+      "file": "docs/implementation/doc_reorg_plan.md",
+      "sections_updated": ["Task 1.2.1"],
+      "checkboxes_completed": [125, 126],
+      "progress_percentage": 35
+    },
+    "commit_info": {
+      "message": "feat(utils): implement ErrorFactory pattern in utilities",
+      "files_staged": ["src/utils/example.js", "tests/utils/example.test.js"],
+      "references": "Implements: doc_reorg_plan.md#task-1.2.1"
+    }
+  },
+  "next_actions": {
+    "status": "ready_for_next|needs_clarification|blocked|complete",
+    "next_item": "<description of next sub-task or action>",
+    "blocking_issues": [],
+    "clarification_needed": []
+  }
+}
+```
+
+### Progress Dashboard Format
+
+```markdown
+## Implementation Progress Dashboard
+
+### Current Status
+- **Project**: [Project Name]
+- **Plan File**: [docs/implementation/project_plan.md]
+- **Overall Progress**: [45%] ████████████░░░░░░░░░░░░░░░░
+- **Current Phase**: [Phase 2 - Core Implementation]
+- **Active Task**: [Task 2.3 - Configuration Updates]
+
+### Recent Completions ✅
+- [x] Task 2.1 - Environment Setup (Completed: 2024-01-15 09:15)
+- [x] Task 2.2 - Dependency Analysis (Completed: 2024-01-15 10:00)
+- [x] Sub-task 2.3.1 - Update package.json (Completed: 2024-01-15 10:30)
+
+### Currently Working On 🔄
+- [ ] Sub-task 2.3.2 - Update ESLint configuration
+  - Action: Modify .eslintrc.js import/resolver settings
+  - Standards: architecture.mdc, codequality.mdc
+  - ETA: 15 minutes
+
+### Upcoming Work ⏳
+- [ ] Sub-task 2.3.3 - Validate CI/CD pipeline
+- [ ] Task 2.4 - Documentation Updates  
+- [ ] Phase 3 - Validation and Rollout
+
+### Quality Metrics
+- **Tests Passing**: ✅ 98% (2 failing, investigating)
+- **Linting Status**: ✅ Clean
+- **Coverage**: ✅ 89% (above 80% threshold)
+- **Standards Compliance**: ✅ Full compliance
+```
+
+---
+
+## 🚫 Implementation Anti-Patterns
+
+### Prohibited Practices
+
+```markdown
+❌ **Never Do These**:
+- Skip validation steps to save time
+- Modify multiple unrelated items in one commit
+- Proceed with failing tests or linting errors
+- Update plan file before work is actually complete
+- Make changes outside the scope of current sub-task
+- Ignore standards compliance for "quick fixes"
+- Assume previous work is correct without verification
+
+✅ **Always Do These**:
+- Complete each sub-task fully before proceeding
+- Validate every change with tests and linting
+- Update documentation with every functional change
+- Follow all applicable standards and patterns
+- Commit changes atomically with clear messages
+- Track progress accurately in plan file
+- Ask for clarification when requirements are unclear
+```
+
+### Quality Gates
+
+```markdown
+**Before Proceeding to Next Item**:
+- [ ] All code changes are complete and tested
+- [ ] All tests pass without failures
+- [ ] All linting passes without errors  
+- [ ] All documentation is updated and accurate
+- [ ] All standards compliance is verified
+- [ ] Plan file is updated with completion status
+- [ ] Changes are committed with proper message
+- [ ] No breaking changes unless explicitly planned
+
+**If Any Gate Fails**:
+1. Stop implementation immediately
+2. Identify and document the issue
+3. Fix the issue completely
+4. Re-run all validation steps
+5. Only proceed when all gates pass
+```
+
+---
+
+## 🔧 Integration with RAS SDK
+
+### Error Handling During Implementation
+
+```js
+const { ErrorFactory } = require('@errors');
+const { LoggerFactory } = require('@utils/logging');
+
+class ImplementationExecutor {
+  constructor(planFile) {
+    this.logger = LoggerFactory.createServiceLogger('ImplementationExecutor');
+    this.planFile = planFile;
+  }
+  
+  async executeSubTask(subTask) {
+    const correlationId = this.generateCorrelationId();
+    
+    try {
+      this.logger.info('Starting sub-task execution', {
+        subTask: subTask.description,
+        correlationId
+      });
+      
+      // Load context and validate prerequisites
+      await this.loadContext(subTask);
+      
+      // Design mini-spec
+      const miniSpec = await this.designMiniSpec(subTask);
+      
+      // Apply changes
+      const changes = await this.applyChanges(miniSpec);
+      
+      // Validate results
+      await this.validateChanges(changes);
+      
+      // Update progress
+      await this.updateProgress(subTask, 'completed');
+      
+      this.logger.info('Sub-task execution completed', {
+        subTask: subTask.description,
+        changesCount: changes.length,
+        correlationId
+      });
+      
+      return {
+        status: 'success',
+        changes: changes,
+        nextAction: 'proceed_to_next'
+      };
+      
+    } catch (error) {
+      this.logger.error('Sub-task execution failed', {
+        subTask: subTask.description,
+        error: error.message,
+        correlationId
+      });
+      
+      throw ErrorFactory.createOperationalError(
+        'Implementation execution failed',
+        'execute_subtask',
+        { subTask: subTask.description },
+        { correlationId, originalError: error.message }
+      );
+    }
+  }
+}
+```
+
+### Standards Validation
+
+```js
+class StandardsValidator {
+  constructor() {
+    this.logger = LoggerFactory.createServiceLogger('StandardsValidator');
+  }
+  
+  async validateImplementation(changes) {
+    const violations = [];
+    
+    // Check alias imports
+    for (const change of changes.files) {
+      if (change.path.endsWith('.js')) {
+        const aliasViolations = await this.checkAliasImports(change.path);
+        violations.push(...aliasViolations);
+      }
+    }
+    
+    // Check error handling
+    const errorViolations = await this.checkErrorHandling(changes);
+    violations.push(...errorViolations);
+    
+    // Check logging patterns
+    const loggingViolations = await this.checkLoggingPatterns(changes);
+    violations.push(...loggingViolations);
+    
+    if (violations.length > 0) {
+      throw ErrorFactory.createValidationError(
+        'Standards compliance violations detected',
+        'standards_validation',
+        { violations }
+      );
+    }
+    
+    return { compliant: true, violations: [] };
+  }
+}
+```
+
+---
+
+*This rule ensures systematic, compliant implementation of all RAS SDK project plans with full validation, standards adherence, and comprehensive progress tracking.*

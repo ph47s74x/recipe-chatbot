@@ -1,0 +1,42 @@
+---
+description: Enforce documentation structure, ownership, and maintenance policies across all `@/docs` files.
+globs: docs/**/*.md
+---
+
+- Every documentation file must include YAML frontmatter with:
+  - `owner`
+  - `last-reviewed`
+  - `stability`
+
+- Documentation must contain the following sections:
+  - `# Purpose`
+  - `# Usage`
+  - `# Dependencies`
+  - `# Edge Cases` *(if applicable)*
+
+- Public APIs and utilities must include at least one **code example** using triple backticks (```) per exported function or interface.
+
+- Documentation updates must be included in the same PR as code changes they describe. PRs that modify `src/` or `services/` must not omit updates to the corresponding `docs/` files.
+
+- Docs must be re-audited and updated:
+  - When ownership of a module changes
+  - When imports or architecture patterns change
+  - When a subsystem is introduced or deprecated
+
+- GitHub Action `docs.yml` must validate:
+  - Dead internal or external links
+  - Missing or stale `last-reviewed` timestamps
+  - Missing frontmatter fields or section headers
+
+## Implementation Documentation Requirements
+
+- Implementation documentation in `docs/implementation/*/phases/` must be split by phase (max 500 lines per file)
+- Generated artifacts (JSON, HTML reports) must be stored in `docs/implementation/*/data/`
+- Analysis documents must be categorized into logical subdirectories
+  - `duplication/` - Code and pattern duplication analysis
+  - `dependencies/` - Dependency mapping and analysis  
+  - `complexity/` - Code complexity and migration effort analysis
+  - `consumers/` - Consumer impact and usage analysis
+- Phase files must follow naming convention: `phase-X.md` or `phase-X-Y.md`
+- All implementation files must have YAML frontmatter with owner, last-reviewed, stability
+

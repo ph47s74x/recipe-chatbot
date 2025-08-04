@@ -1,0 +1,24 @@
+---
+description: Ensure every top-level module in `src/` has a corresponding documentation file in `docs/`.
+globs: src/**/index.js
+---
+
+- For every `src/<module>/index.js`, there **must** be a corresponding file at: 
+
+docs/<module>.md
+
+or
+
+docs/<domain>/<module>.md
+
+
+- Acceptable docs subfolders: `docs/standards/`, `docs/architecture/`, or domain-specific folders.
+
+- The documentation file **must**:
+- Include the same module name in the filename.
+- Cover the exported functions, classes, constants, or middleware described in the corresponding code.
+- Follow the [Documentation Standards](docs/standards/documentation.md) format.
+
+- If the `index.js` is a barrel file (re-export only), documentation may live under the submodules, but a stub doc must still exist with references.
+
+- CI and pre-commit checks must validate parity using a filesystem scan.
